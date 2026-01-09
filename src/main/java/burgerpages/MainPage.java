@@ -9,7 +9,7 @@ public class MainPage {
         this.driver=driver;
     }
 
-    private final By loginButton = By.cssSelector(".button_button__33qZ0.button_button_type_primary__1O7Bx.button_button_size_large__G21Vg");
+    public final By loginButton = By.cssSelector(".button_button__33qZ0.button_button_type_primary__1O7Bx.button_button_size_large__G21Vg");
     private final By bunConstructButton = By.xpath(".//span[text()='Булки']");
     private final By sauceConstructButton = By.xpath(".//span[text()='Соусы']");
     private final By fillingsConstructButton = By.xpath(".//span[text()='Начинки']");

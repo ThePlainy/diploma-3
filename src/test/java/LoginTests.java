@@ -15,6 +15,7 @@ import java.time.Duration;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class LoginTests {
 
@@ -43,8 +44,9 @@ public class LoginTests {
         objLoginPage.setEmail(user);
         objLoginPage.setPassword(user);
         objLoginPage.loginButtonClick();
+        MainPage objMainPage = new MainPage(driver);
         new WebDriverWait(driver, Duration.ofSeconds(Constants.EXPLICIT_WAIT)).until(ExpectedConditions.urlMatches(Constants.BURGER_MAIN_PAGE));
-        assertThat(driver.getCurrentUrl(), is(Constants.BURGER_MAIN_PAGE));
+        assertTrue(driver.findElement(objMainPage.loginButton).isDisplayed());
     }
 
     @Test
