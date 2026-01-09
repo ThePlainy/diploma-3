@@ -4,8 +4,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import steps.UserSteps;
@@ -17,10 +15,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class RegistrationTests {
+public class RegistrationTests extends BaseTest{
 
     protected final User user = new User();
-    public WebDriver driver;
     protected final UserSteps userSteps = new UserSteps();
 
     @Before
@@ -30,10 +27,7 @@ public class RegistrationTests {
                 .withPassword(RandomStringUtils.randomAlphanumeric(10))
                 .withName(RandomStringUtils.randomAlphabetic(10));
 
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_WAIT));
         driver.get(Constants.BURGER_REGISTRATION_PAGE);
-        driver.manage().window().maximize();
     }
 
     @Test
@@ -53,14 +47,13 @@ public class RegistrationTests {
         user.withPassword(RandomStringUtils.randomAlphanumeric(5));
         objRegistrationPage.setPassword(user);
         objRegistrationPage.registrationButtonClick();
-        new WebDriverWait(driver, Duration.ofSeconds(Constants.EXPLICIT_WAIT)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(objRegistrationPage.wrongPasswordError));
-        assertTrue(driver.findElement(objRegistrationPage.wrongPasswordError).isDisplayed());
+        new WebDriverWait(driver, Duration.ofSeconds(Constants.EXPLICIT_WAIT)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(objRegistrationPage.getWrongPasswordErrorBy()));
+        assertTrue(driver.findElement(objRegistrationPage.getWrongPasswordErrorBy()).isDisplayed());
     }
 
     @After
-    public void teardown(){
+    public void teardownUser(){
         user.addAccessToken(userSteps.loginUser(user));
         userSteps.deleteUser(user);
-        driver.quit();
     }
 }

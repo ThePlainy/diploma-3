@@ -4,12 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class MainPage {
+
     public final WebDriver driver;
     public MainPage(WebDriver driver){
         this.driver=driver;
     }
 
-    public final By loginButton = By.cssSelector(".button_button__33qZ0.button_button_type_primary__1O7Bx.button_button_size_large__G21Vg");
+    private final By loginButton = By.cssSelector(".button_button__33qZ0.button_button_type_primary__1O7Bx.button_button_size_large__G21Vg");
     private final By bunConstructButton = By.xpath(".//span[text()='Булки']");
     private final By sauceConstructButton = By.xpath(".//span[text()='Соусы']");
     private final By fillingsConstructButton = By.xpath(".//span[text()='Начинки']");
@@ -35,4 +36,7 @@ public class MainPage {
         driver.findElement(loginButton).click();
     }
 
+    public By getLoginButtonBy(){
+        return loginButton;
+    }
 }

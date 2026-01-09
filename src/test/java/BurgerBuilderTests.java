@@ -1,28 +1,16 @@
 import burgerpages.MainPage;
-import com.sun.tools.javac.Main;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import util.Constants;
-
-import java.time.Duration;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class BurgerBuilderTests {
-
-    public WebDriver driver;
+public class BurgerBuilderTests extends BaseTest {
 
     @Before
     public void startup(){
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_WAIT));
         driver.get(Constants.BURGER_MAIN_PAGE);
-        driver.manage().window().maximize();
     }
 
     @Test
@@ -45,10 +33,5 @@ public class BurgerBuilderTests {
         objMainPage.sauceConstructButtonClick();
         objMainPage.bunConstructButtonClick();
         assertThat(objMainPage.getActiveConstructButtonText(), is("Булки"));
-    }
-
-    @After
-    public void teardown(){
-        driver.quit();
     }
 }
