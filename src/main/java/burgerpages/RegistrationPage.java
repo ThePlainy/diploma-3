@@ -1,5 +1,6 @@
 package burgerpages;
 
+import io.qameta.allure.Step;
 import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,25 +20,30 @@ public class RegistrationPage {
     private final By wrongPasswordError = By.xpath(".//*[text()='Некорректный пароль']");
     private final By loginButton = By.cssSelector(".Auth_link__1fOlj");
 
+    @Step("Заполнение поля Имя")
     public void setName(User user){
         driver.findElement(registrationNameField).click();
         driver.findElement(activeField).sendKeys(user.getName());
     }
 
+    @Step("Заполнение поля email")
     public void setEmail(User user){
         driver.findElement(registrationEmailField).click();
         driver.findElement(activeField).sendKeys(user.getEmail());
     }
 
+    @Step("Заполнение поля пароль")
     public void setPassword(User user){
         driver.findElement(registrationPasswordField).click();
         driver.findElement(activeField).sendKeys(user.getPassword() );
     }
 
+    @Step("Нажатие на кнопку Зарегистрироваться")
     public void registrationButtonClick(){
         driver.findElement(registrationButton).click();
     }
 
+    @Step("Нажатие на кнопку Войти")
     public void loginButtonClick(){
         driver.findElement(loginButton).click();
     }

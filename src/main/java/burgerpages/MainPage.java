@@ -1,5 +1,6 @@
 package burgerpages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -16,14 +17,17 @@ public class MainPage {
     private final By fillingsConstructButton = By.xpath(".//span[text()='Начинки']");
     private final By activeConstructButton = By.xpath(".//div[contains(@class, 'tab_tab_type_current__2BEPc')]//span");
 
+    @Step("Нажатие на кнопку Булки")
     public void bunConstructButtonClick(){
         driver.findElement(bunConstructButton).click();
     }
 
+    @Step("Нажатие на кнопку Соусы")
     public void sauceConstructButtonClick(){
         driver.findElement(sauceConstructButton).click();
     }
 
+    @Step("Нажатие на кнопку Начинки")
     public void fillingsConstructButtonClick(){
         driver.findElement(fillingsConstructButton).click();
     }
@@ -32,6 +36,7 @@ public class MainPage {
         return driver.findElement(activeConstructButton).getText();
     }
 
+    @Step("Нажатие на кнопку Войти")
     public void loginButtonClick(){
         driver.findElement(loginButton).click();
     }
