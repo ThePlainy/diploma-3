@@ -4,12 +4,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import steps.UserSteps;
 import util.Constants;
-
-import java.time.Duration;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -38,7 +34,6 @@ public class LoginTests extends BaseTest{
         objLoginPage.setPassword(user);
         objLoginPage.loginButtonClick();
         MainPage objMainPage = new MainPage(driver);
-        new WebDriverWait(driver, Duration.ofSeconds(Constants.EXPLICIT_WAIT)).until(ExpectedConditions.urlMatches(Constants.BURGER_MAIN_PAGE));
         assertTrue(driver.findElement(objMainPage.getLoginButtonBy()).isDisplayed());
     }
 
@@ -47,7 +42,6 @@ public class LoginTests extends BaseTest{
         driver.get(Constants.BURGER_MAIN_PAGE);
         MainPage objMainPage = new MainPage(driver);
         objMainPage.loginButtonClick();
-        new WebDriverWait(driver, Duration.ofSeconds(Constants.EXPLICIT_WAIT)).until(ExpectedConditions.urlMatches(Constants.BURGER_LOGIN_PAGE));
         assertThat(driver.getCurrentUrl(), is(Constants.BURGER_LOGIN_PAGE));
     }
 
@@ -56,7 +50,6 @@ public class LoginTests extends BaseTest{
         driver.get(Constants.BURGER_MAIN_PAGE);
         Header objHeader = new Header(driver);
         objHeader.personalAccountButtonClick();
-        new WebDriverWait(driver, Duration.ofSeconds(Constants.EXPLICIT_WAIT)).until(ExpectedConditions.urlMatches(Constants.BURGER_LOGIN_PAGE));
         assertThat(driver.getCurrentUrl(), is(Constants.BURGER_LOGIN_PAGE));
     }
 
@@ -65,7 +58,6 @@ public class LoginTests extends BaseTest{
         driver.get(Constants.BURGER_REGISTRATION_PAGE);
         RegistrationPage objRegistrationPage = new RegistrationPage(driver);
         objRegistrationPage.loginButtonClick();
-        new WebDriverWait(driver, Duration.ofSeconds(Constants.EXPLICIT_WAIT)).until(ExpectedConditions.urlMatches(Constants.BURGER_LOGIN_PAGE));
         assertThat(driver.getCurrentUrl(), is(Constants.BURGER_LOGIN_PAGE));
     }
 
@@ -74,7 +66,6 @@ public class LoginTests extends BaseTest{
         driver.get(Constants.BURGER_PASSWORD_RECOVERY_PAGE);
         PasswordRecoveryPage objPasswordRecoveryPage = new PasswordRecoveryPage(driver);
         objPasswordRecoveryPage.loginButtonClick();
-        new WebDriverWait(driver, Duration.ofSeconds(Constants.EXPLICIT_WAIT)).until(ExpectedConditions.urlMatches(Constants.BURGER_LOGIN_PAGE));
         assertThat(driver.getCurrentUrl(), is(Constants.BURGER_LOGIN_PAGE));
     }
 

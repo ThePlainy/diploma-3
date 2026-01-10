@@ -4,12 +4,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import steps.UserSteps;
 import util.Constants;
-
-import java.time.Duration;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -37,7 +33,6 @@ public class RegistrationTests extends BaseTest{
         objRegistrationPage.setEmail(user);
         objRegistrationPage.setPassword(user);
         objRegistrationPage.registrationButtonClick();
-        new WebDriverWait(driver, Duration.ofSeconds(Constants.EXPLICIT_WAIT)).until(ExpectedConditions.urlMatches(Constants.BURGER_LOGIN_PAGE));
         assertThat(driver.getCurrentUrl(), is(Constants.BURGER_LOGIN_PAGE));
     }
 
@@ -46,8 +41,7 @@ public class RegistrationTests extends BaseTest{
         RegistrationPage objRegistrationPage = new RegistrationPage(driver);
         user.withPassword(RandomStringUtils.randomAlphanumeric(5));
         objRegistrationPage.setPassword(user);
-        objRegistrationPage.registrationButtonClick();
-        new WebDriverWait(driver, Duration.ofSeconds(Constants.EXPLICIT_WAIT)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(objRegistrationPage.getWrongPasswordErrorBy()));
+        objRegistrationPage.waitForWrongPasswordError();
         assertTrue(driver.findElement(objRegistrationPage.getWrongPasswordErrorBy()).isDisplayed());
     }
 

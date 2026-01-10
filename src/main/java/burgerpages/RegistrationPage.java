@@ -4,6 +4,11 @@ import io.qameta.allure.Step;
 import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import util.Constants;
+
+import java.time.Duration;
 
 public class RegistrationPage {
 
@@ -41,11 +46,19 @@ public class RegistrationPage {
     @Step("Нажатие на кнопку Зарегистрироваться")
     public void registrationButtonClick(){
         driver.findElement(registrationButton).click();
+        new WebDriverWait(driver, Duration.ofSeconds(Constants.EXPLICIT_WAIT)).until(ExpectedConditions.urlMatches(Constants.BURGER_LOGIN_PAGE));
+    }
+
+    @Step("Ожидание ошибки некорректного пароля")
+    public void waitForWrongPasswordError(){
+        driver.findElement(registrationButton).click();
+        new WebDriverWait(driver, Duration.ofSeconds(Constants.EXPLICIT_WAIT)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(wrongPasswordError));
     }
 
     @Step("Нажатие на кнопку Войти")
     public void loginButtonClick(){
         driver.findElement(loginButton).click();
+        new WebDriverWait(driver, Duration.ofSeconds(Constants.EXPLICIT_WAIT)).until(ExpectedConditions.urlMatches(Constants.BURGER_LOGIN_PAGE));
     }
 
     public By getWrongPasswordErrorBy(){
